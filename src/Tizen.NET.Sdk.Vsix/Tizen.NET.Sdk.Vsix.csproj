@@ -1,0 +1,96 @@
+﻿<Project>
+  <Import Project="..\..\build\common.props" />
+  <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
+  <PropertyGroup>
+    <TargetFramework>netstandard1.6</TargetFramework>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <IncludeSymbols>false</IncludeSymbols>
+    <GeneratePkgDefFile>false</GeneratePkgDefFile>
+    <IncludeAssemblyInVSIXContainer>false</IncludeAssemblyInVSIXContainer>
+    <IncludeDebugSymbolsInVSIXContainer>false</IncludeDebugSymbolsInVSIXContainer>
+    <IncludeDebugSymbolsInLocalVSIXDeployment>false</IncludeDebugSymbolsInLocalVSIXDeployment>
+    <CopyBuildOutputToOutputDirectory>false</CopyBuildOutputToOutputDirectory>
+    <CopyOutputSymbolsToOutputDirectory>false</CopyOutputSymbolsToOutputDirectory>
+    <CreateVsixContainer>true</CreateVsixContainer>
+    <StartAction>Program</StartAction>
+    <StartProgram>$(DevEnvDir)\devenv.exe</StartProgram>
+    <StartArguments>/rootsuffix Exp</StartArguments>
+    <SchemaVersion>2.0</SchemaVersion>
+    <DeployExtension>false</DeployExtension>
+    <!--TargetVsixContainerName>Tizen.NET.Sdk.vsix</TargetVsixContainerName-->
+    <TargetVsixContainerName>Tizen.NET.Sdk_v$(VersionPrefix).vsix</TargetVsixContainerName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="..\Tizen.NET.Build.Tasks\build\*">
+      <InstallRoot>MSBuild</InstallRoot>
+      <VSIXSubPath>Sdks\Tizen.NET.Sdk\build</VSIXSubPath>
+      <IncludeInVSIX>true</IncludeInVSIX>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="..\Tizen.NET.Build.Tasks\build\tizen3*">
+      <InstallRoot>MSBuild</InstallRoot>
+      <VSIXSubPath>Sdks\Tizen.NET.Sdk\build\tizen3</VSIXSubPath>
+      <IncludeInVSIX>true</IncludeInVSIX>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="..\Tizen.NET.Build.Tasks\Sdk\*">
+      <InstallRoot>MSBuild</InstallRoot>
+      <VSIXSubPath>Sdks\Tizen.NET.Sdk\Sdk</VSIXSubPath>
+      <IncludeInVSIX>true</IncludeInVSIX>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="..\Tizen.NET.Build.Tasks\bin\$(Configuration)\net45\*.dll">
+      <InstallRoot>MSBuild</InstallRoot>
+      <VSIXSubPath>Sdks\Tizen.NET.Sdk\tools\net45</VSIXSubPath>
+      <IncludeInVSIX>true</IncludeInVSIX>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="..\Tizen.NET.Build.Tasks\bin\$(Configuration)\netstandard1.6\BouncyCastle.Crypto.dll">
+      <InstallRoot>MSBuild</InstallRoot>
+      <VSIXSubPath>Sdks\Tizen.NET.Sdk\tools\netstandard1.6</VSIXSubPath>
+      <IncludeInVSIX>true</IncludeInVSIX>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="..\Tizen.NET.Build.Tasks\bin\$(Configuration)\netstandard1.6\Tizen.NET.Build.Tasks.dll">
+      <InstallRoot>MSBuild</InstallRoot>
+      <VSIXSubPath>Sdks\Tizen.NET.Sdk\tools\netstandard1.6</VSIXSubPath>
+      <IncludeInVSIX>true</IncludeInVSIX>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Tizen.NET.Build.Tasks\Tizen.NET.Build.Tasks.csproj">
+      <Private>false</Private>
+    </ProjectReference>
+    <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="15.0.26201" />
+  </ItemGroup>
+
+  <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
+  <Import Project="$(VSToolsPath)\vssdk\Microsoft.VsSDK.targets" Condition="Exists('$(VSToolsPath)\vssdk\Microsoft.VsSDK.targets')" />
+  <Target Name="Compile" />
+  <Target Name="CopyFilesToOutputDirectory" />
+
+  <PropertyGroup>
+    <VSIXDirectory Condition=" '$(VSIXDirectory)'=='' ">..\..\bin\$(Configuration)\VSIX\</VSIXDirectory>
+  </PropertyGroup>
+
+  <Target Name="CopyToVsixContents1" AfterTargets="Build">
+    <ItemGroup>
+      <_VsixContents Include="$(OutputPath)$(TargetVsixContainerName)" DestPath="$(VSIXDirectory)" />
+
+    </ItemGroup>
+    <PropertyGroup>
+      <MYOutPut>$(OutputPath)</MYOutPut>
+      <MYOutPutDIR>$(OutDir)</MYOutPutDIR>
+    </PropertyGroup>
+
+    <Message Text="_VsixContents Destination @(_VsixContents->'$(VSIXDirectory)%(RecursiveDir)%(Filename)%(Extension)')" Importance="high" />
+
+    <Copy SourceFiles="@(_VsixContents)" DestinationFiles="@(_VsixContents->'$(VSIXDirectory)%(RecursiveDir)%(Filename)%(Extension)')" OverwriteReadOnlyFiles="true" Retries="10">
+      <Output TaskParameter="DestinationFiles" ItemName="FileWrites" />
+    </Copy>
+  </Target>
+
+</Project>

@@ -1,0 +1,35 @@
+﻿<Project>
+  <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
+  <Import Project="..\..\version.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <NoPackageAnalysis>true</NoPackageAnalysis>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <IncludeSymbols>false</IncludeSymbols>
+    <NuspecFile>$(MSBuildThisFileDirectory)Tizen.NET.Sdk.nuspec</NuspecFile>
+    <NuspecProperties>
+      version=$(TizenNetSdkVersion);
+      configuration=$(Configuration);
+    </NuspecProperties>
+
+    <PackageOutputPath Condition="'$(BinariesDirectory)'==''">..\..\bin\$(Configuration)\Packages\</PackageOutputPath>
+    <PackageOutputPath Condition="'$(BinariesDirectory)'!=''">$(BinariesDirectory)Packages\</PackageOutputPath>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Tizen.NET.Build.Tasks\Tizen.NET.Build.Tasks.csproj" />
+  </ItemGroup>
+
+  <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
+  <Target Name="Compile" />
+  <Target Name="CopyFilesToOutputDirectory" />
+  <Target Name="WriteVersion" AfterTargets="Build">
+    <WriteLinesToFile File="..\..\BuiltVersion.xml" Lines="&lt;Project&gt;" Overwrite="true" />
+    <WriteLinesToFile File="..\..\BuiltVersion.xml" Lines="&lt;PropertyGroup&gt;" />
+    <WriteLinesToFile File="..\..\BuiltVersion.xml" Lines="&lt;TizenNetSdkBuiltVersion&gt;$(TizenNetSdkVersion)&lt;/TizenNetSdkBuiltVersion&gt;" />
+    <WriteLinesToFile File="..\..\BuiltVersion.xml" Lines="&lt;/PropertyGroup&gt;" />
+    <WriteLinesToFile File="..\..\BuiltVersion.xml" Lines="&lt;/Project&gt;" />
+  </Target>
+</Project>

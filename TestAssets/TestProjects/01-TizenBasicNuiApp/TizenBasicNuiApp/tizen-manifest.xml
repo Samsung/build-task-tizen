@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="http://tizen.org/ns/packages" api-version="3" package="TizenBasicNuiApp" version="1.0.0">
+  <profile name="common" />
+  <ui-application appid="org.tizen.example.TizenBasicNuiApp"
+					exec="TizenBasicNuiApp.dll"
+					type="dotnet"
+					multiple="false"
+					taskmanage="true"
+					nodisplay="false"
+					launch_mode="single">
+    <label>TizenBasicNuiApp</label>
+    <icon>TizenBasicNuiApp.png</icon>
+  </ui-application>
+</manifest>

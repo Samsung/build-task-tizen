@@ -1,0 +1,87 @@
+<Project DefaultTargets="Build">
+  <PropertyGroup>
+    <RepositoryRootDirectory>$(MSBuildThisFileDirectory)..\</RepositoryRootDirectory>
+    <TestsDirectory>$(RepositoryRootDirectory)bin\$(Configuration)\Tests\</TestsDirectory>
+
+    <!-- Make note NUGET_PACKAGES is environment variable respected
+          by NuGet.exe, so don't be tempted to change the name.-->
+    <NUGET_PACKAGES Condition="'$(NUGET_PACKAGES)' == ''">$(UserProfile)\.nuget\packages</NUGET_PACKAGES>
+
+    <DotNet_Install_Dir Condition=" '$(DotNet_Install_Dir)' == ''">$(RepositoryRootDirectory).dotnet_cli\</DotNet_Install_Dir>
+    <DotNetTool>$(DotNet_Install_Dir)\dotnet</DotNetTool>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <SolutionFile Include="$(RepositoryRootDirectory)src\Tizen.NET.Build.Tasks.sln" />
+    <NuGetProjectFile Include="$(RepositoryRootDirectory)src\Tizen.NET.Sdk.Nuget\Tizen.NET.Sdk.Nuget.csproj" />
+    <VsManProjectFile Include="$(RepositoryRootDirectory)src\Tizen.NET.Sdk.Vsix\Tizen.NET.Sdk.Vsix.csproj" />
+    <UnitTestProjectFile Include="$(RepositoryRootDirectory)src\Tizen.NET.Build.Tasks.xUnitTest\Tizen.NET.Build.Tasks.xUnitTest.csproj" />
+    <UnitTestAssetProjectFile Include="$(RepositoryRootDirectory)test\Tizen.NET.Sdk.Tests\Tizen.NET.Sdk.Tests.csproj" />
+  </ItemGroup>
+
+  <Target Name="Restore">
+
+    <Message Text="Restoring packages for %(SolutionFile.Filename) (this may take some time)" Importance="high" />
+
+    <MSBuild BuildInParallel="true"
+             Projects="@(SolutionFile)"
+             Targets="restore"
+             Properties="$(CommonMSBuildGlobalProperties)"
+             />
+  </Target>
+
+  <Target Name="Build">
+
+    <Message Text="Building %(SolutionFile.Filename) [$(Configuration)]" Importance="high" />
+
+    <MSBuild BuildInParallel="true"
+             Projects="@(SolutionFile)"
+             Targets="Build"
+             />
+  </Target>
+
+  <Target Name="Rebuild">
+
+    <Message Text="Rebuilding %(SolutionFile.Filename) [$(Configuration)]" Importance="high" />
+
+    <MSBuild BuildInParallel="true"
+             Projects="@(SolutionFile)"
+             Targets="Rebuild"
+             />
+  </Target>
+
+  <Target Name="xUnitTest" Condition="'$(RunTests)' == 'true'">
+
+    <Message Text="Running tests for %(UnitTestProjectFile.Filename) [$(Configuration)]" Importance="high" />
+
+    <Exec Command="&quot;$(DotNetTool)&quot; &quot;test&quot; &quot;%(UnitTestProjectFile.FullPath)&quot; -c &quot;$(Configuration)&quot; &quot;--no-build&quot; --verbosity &quot;normal&quot; -l &quot;trx;LogFileName=$(TestsDirectory)%(UnitTestProjectFile.FileName).TestResult.trx&quot;"
+          IgnoreExitCode="true"
+          IgnoreStandardErrorWarningFormat="true"
+          >
+
+      <Output TaskParameter="ExitCode" PropertyName="ExitCode" />
+    </Exec>
+
+    <Message Text="All tests passed, for full log see $(TestsDirectory)%(UnitTestProjectFile.FileName).TestResult.trx" Condition="$(ExitCode) == 0" Importance="high" />
+    <Error Text="There were test failures" Condition="$(ExitCode) != 0" />
+
+  </Target>
+
+  <Target Name="TestAssets" Condition="'$(RunTests)' == 'true'">
+
+    <Message Text="Running tests for %(UnitTestAssetProjectFile.Filename) [$(Configuration)]" Importance="high" />
+
+    <Exec Command="&quot;$(DotNetTool)&quot; &quot;test&quot; &quot;%(UnitTestAssetProjectFile.FullPath)&quot; -c &quot;$(Configuration)&quot; &quot;--no-build&quot; --verbosity &quot;normal&quot; -l &quot;trx;LogFileName=$(TestsDirectory)%(UnitTestAssetProjectFile.FileName).TestResult.trx&quot;"
+          IgnoreExitCode="true"
+          IgnoreStandardErrorWarningFormat="true"
+          >
+
+      <Output TaskParameter="ExitCode" PropertyName="ExitCode" />
+    </Exec>
+
+    <Message Text="All tests passed, for full log see $(TestsDirectory)%(UnitTestAssetProjectFile.FileName).TestResult.trx" Condition="$(ExitCode) == 0" Importance="high" />
+    <Error Text="There were test failures" Condition="$(ExitCode) != 0" />
+
+  </Target>
+
+</Project>

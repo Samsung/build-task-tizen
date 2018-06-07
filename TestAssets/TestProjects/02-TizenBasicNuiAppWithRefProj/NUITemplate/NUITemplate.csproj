@@ -1,0 +1,56 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>None</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="lib\" />
+    <Folder Include="res\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Tizen.NET" Version="4.0.0-*">
+      <ExcludeAssets>Runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Tizen.NET.Sdk" Version="$(TizenNetSdkBuiltVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ClassLibrary1\ClassLibrary1.csproj" />
+    <ProjectReference Include="..\ClassLibraryVD\ClassLibraryVD.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="MainResource1.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MainResource1.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="MainResource1.en-GB.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="MainResource1.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MainResource1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <TizenTpkUserExcludeFiles Include="res\ResourceShouldBeInclude.bmp" />
+    <TizenTpkUserExcludeFiles Include="ClassLibrary1.pdb" />
+  </ItemGroup>
+
+</Project>
+

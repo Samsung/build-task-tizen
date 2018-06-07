@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>Tizen.NET.Sdk</id>
+    <version>$version$</version>
+    <authors>Samsung Electronics</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <licenseUrl>https://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
+    <projectUrl>https://www.tizen.org/</projectUrl>
+    <iconUrl>https://developer.tizen.org/sites/default/files/images/tizen-pinwheel-on-light-rgb_64_64.png</iconUrl>
+    <copyright>© Samsung Electronics Co., Ltd All Rights Reserved</copyright>
+    <description>The MSBuild targets and properties for building Tizen .NET Core projects.</description>
+  </metadata>
+  <files>
+    <file src="..\Tizen.NET.Build.Tasks\bin\$configuration$\**\Tizen.NET.Build.Tasks.dll" target="tools" />
+    <file src="..\Tizen.NET.Build.Tasks\bin\$configuration$\**\BouncyCastle.Crypto.dll" target="tools" />
+    <file src="..\Tizen.NET.Build.Tasks\build\**\*" target="build" />
+    <file src="..\Tizen.NET.Build.Tasks\certificate\**\*" target="certificate" />
+  </files>
+</package>

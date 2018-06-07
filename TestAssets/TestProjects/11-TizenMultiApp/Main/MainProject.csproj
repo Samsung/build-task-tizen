@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>None</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="lib\" />
+    <Folder Include="res\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Tizen.NET" Version="4.0.0-*">
+      <ExcludeAssets>Runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Tizen.NET.Sdk" Version="$(TizenNetSdkBuiltVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Sub1\SubProject1.csproj" />
+    <ProjectReference Include="..\Sub2\SubProject2.csproj" />
+  </ItemGroup>
+
+</Project>
+

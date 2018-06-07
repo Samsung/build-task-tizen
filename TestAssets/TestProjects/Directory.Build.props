@@ -1,0 +1,3 @@
+<Project>
+  <Import Project="..\..\BuiltVersion.xml" Condition="Exists('..\..\BuiltVersion.xml')"/>
+</Project>

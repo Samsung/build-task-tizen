@@ -1,0 +1,5 @@
+<Project>
+  <PropertyGroup>
+    <TizenNetSdkVersion>1.0.1</TizenNetSdkVersion>
+  </PropertyGroup>
+</Project>

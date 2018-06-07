@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest package="org.tizen.example.custom" version="1.0.0" api-version="3" xmlns="http://tizen.org/ns/packages">
+    <profile name="common" />
+    <ui-application appid="org.tizen.example.custom" exec="A.dll" multiple="false" nodisplay="false" taskmanage="true" splash-screen-display="true" type="dotnet" launch_mode="single">
+        <label>NUITemplate</label>
+        <icon>NUITemplate10.png</icon>
+    </ui-application>
+    <shortcut-list />
+</manifest>

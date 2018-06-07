@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>None</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="lib\" />
+    <Folder Include="res\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Tizen.NET" Version="4.0.0-*">
+      <ExcludeAssets>Runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Tizen.NET.Sdk" Version="$(TizenNetSdkBuiltVersion)" />
+  </ItemGroup>
+  
+  <Target Name="TestPrePackageEvent" BeforeTargets="TizenPrePackageEvent">
+    <Message Importance="high"
+             Text="TestPrePackageEvent!!" />
+  </Target>
+
+  <Target Name="TestPostPackageEvent" AfterTargets="TizenPostPackageEvent">
+    <Message Importance="high"
+             Text="TestPostPackageEvent!!" />
+  </Target>
+  <Target Name="TestClean" AfterTargets="Clean">
+    <Message Importance="high"
+             Text="TestClean!!" />
+  </Target>
+  <Target Name="TestBuild" AfterTargets="Build">
+    <Message Importance="high"
+             Text="TestBuild!!" />
+  </Target>
+</Project>
+
