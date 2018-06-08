@@ -8,8 +8,8 @@ Finally, `Tizen.NET.Sdk` compresses the tpk root with the package name and signs
 ## Enable generating tpk file
 Add `Tizen.NET.Sdk` to  PackageReference  and build project.
 
-- In Visual Studio 2017 : https://github.sec.samsung.net/dotnet/vs-tools-cps/blob/master/docs/packaging/how-to-build-vs.md
-- In .NET Core command-line infterface(CLI) : https://github.sec.samsung.net/dotnet/vs-tools-cps/blob/master/docs/packaging/how-to-build-cli.md
+- In Visual Studio 2017 : https://github.com/Samsung/vs-tools-cps/blob/master/docs/packaging/how-to-build-vs.md
+- In .NET Core command-line infterface(CLI) : https://github.com/Samsung/vs-tools-cps/blob/master/docs/packaging/how-to-build-cli.md
 
 ## Include Files to tpk
 ### Default include files
