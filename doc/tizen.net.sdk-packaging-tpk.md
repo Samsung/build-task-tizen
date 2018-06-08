@@ -124,7 +124,7 @@ Example Code :
 ```
 
 ## See Also
-- [Tizen.NET.Sdk properties](https://github.sec.samsung.net/dotnet/build-task-tizen/blob/master/doc/tizen.net.sdk-reference.md#tizennetsdk-properties)
-- [Tizen.NET.Sdk Items](https://github.sec.samsung.net/dotnet/build-task-tizen/blob/master/doc/tizen.net.sdk-reference.md#tizennetsdk-items)
-- [Default include files](https://github.sec.samsung.net/dotnet/build-task-tizen/blob/master/doc/tizen.net.sdk-reference.md#default-tpk-package-includes-in-tizennetsdk)
-- [Tizen.NET.Sdk Reference](https://github.sec.samsung.net/dotnet/build-task-tizen/blob/master/doc/tizen.net.sdk-reference.md)
+- [Tizen.NET.Sdk properties](https://github.com/Samsung/build-task-tizen/blob/master/doc/tizen.net.sdk-reference.md#tizennetsdk-properties)
+- [Tizen.NET.Sdk Items](https://github.com/Samsung/build-task-tizen/blob/master/doc/tizen.net.sdk-reference.md#tizennetsdk-items)
+- [Default include files](https://github.com/Samsung/build-task-tizen/blob/master/doc/tizen.net.sdk-reference.md#default-tpk-package-includes-in-tizennetsdk)
+- [Tizen.NET.Sdk Reference](https://github.com/Samsung/build-task-tizen/blob/master/doc/tizen.net.sdk-reference.md)
