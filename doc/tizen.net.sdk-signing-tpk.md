@@ -25,7 +25,7 @@ Build succeeded.
 
 ## Sign with User Certificate
 If you are developing a Tizen application on VS2017, you can manage your certificates through `Certificate Manager`. (see the [certificate manager](https://github.sec.samsung.net/dotnet/vs-tools-cps/blob/master/docs/tools/certificate-manager.md))
-Then you can build with your cetificate in Visual Studio.
+Then you can build with your certificate in Visual Studio.
 
 Otherwise, you can pass the certificate information to `Tizen.NET.Sdk` via the property.
 

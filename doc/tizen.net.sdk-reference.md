@@ -30,7 +30,7 @@ Represents user files to tpk package
 
 #### TizenTpkUserExcludeFiles
 
-Represents files to exclude from tpk. ('*' can be used only when the files exists on project.)
+Represents files to exclude from tpk. ('*' can be used only when the files exist on project.)
 > Assemby files(.dll) can be excluded by specific filename. 
  
 
