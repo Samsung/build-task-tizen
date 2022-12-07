@@ -15,7 +15,7 @@
 
   <!-- Include Nuget Package for Tizen Project building -->
   <ItemGroup>
-	<PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+	<PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
 	<PackageReference Include="Tizen.NET" Version="4.0.0-*" />
   </ItemGroup>
   <ItemGroup>
